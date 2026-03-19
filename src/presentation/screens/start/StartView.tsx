@@ -1,4 +1,4 @@
-import { Button, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ROUTES } from '../../navigation';
 import { IScreen } from '../../types';
@@ -16,7 +16,10 @@ const StartView: IScreen<ROUTES.START> = props => {
 
   return (
     <View style={{ paddingTop: safeAreaInsets.top }}>
-      <Button title={t('button')} onPress={changeLang} />
+      <Text style={{ marginBottom: 20, fontSize: 20 }}>
+        {t('StartScreen:title')}
+      </Text>
+      <Button title={t('common:button')} onPress={changeLang} />
       <View style={{ height: 10 }} />
       <Button
         title={'open first screen'}

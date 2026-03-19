@@ -1,8 +1,8 @@
-import common from '../common/en.json';
+import { ROUTES } from '../../navigation';
+import common from './common/en.json';
 import startScreen from '../../screens/start/locales/en.json';
 import firstScreen from '../../screens/first/locales/en.json';
 import secondScreen from '../../screens/second/locales/en.json';
-import { ROUTES } from '../../navigation';
 
 const resources = {
   common,

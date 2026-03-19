@@ -1,11 +1,11 @@
 import { TFunction } from 'i18next';
 import { FC } from 'react';
 import { ROUTES, StackScreenProps } from '../navigation';
-import { ScreenNamespaces } from '../translations/route-namespaces.ts';
+import { ScreenNamespacesType } from '../translations';
 
 export interface IScreenProps<Screen extends ROUTES>
   extends StackScreenProps<Screen> {
-  t: TFunction<ScreenNamespaces<Screen>>;
+  t: TFunction<ScreenNamespacesType<Screen>>;
 }
 
 export type IScreen<Screen extends ROUTES> = FC<IScreenProps<Screen>>
