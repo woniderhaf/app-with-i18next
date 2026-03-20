@@ -1,12 +1,13 @@
+import { Text, View } from 'react-native';
 import { IScreen } from '../../types';
 import { ROUTES } from '../../navigation';
-import { Text, View } from 'react-native';
+import { ScreenTranslationImpl } from '../../translations';
 
-const SecondView: IScreen<ROUTES.SECOND> = props => {
-  const { t } = props;
+const SecondView: IScreen<ROUTES.SECOND> = () => {
+  const { t } = new ScreenTranslationImpl(ROUTES.SECOND);
   return (
     <View>
-      <Text>{t('SecondScreen:title')}</Text>
+      <Text>{t('title')}</Text>
     </View>
   );
 };

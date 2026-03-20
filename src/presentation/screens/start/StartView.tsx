@@ -2,24 +2,33 @@ import { Button, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ROUTES } from '../../navigation';
 import { IScreen } from '../../types';
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { ILanguage } from '../../translations/types';
+import { ScreenTranslationImpl } from '../../translations';
 
 const StartView: IScreen<ROUTES.START> = props => {
-  const { t, navigation } = props;
+  const { navigation } = props;
 
   const safeAreaInsets = useSafeAreaInsets();
-  const { i18n } = useTranslation();
+
+  // будем получать t через DI
+  const { t, changeLanguage, getLanguage } = new ScreenTranslationImpl([
+    ROUTES.START,
+    'common',
+  ]);
+
+  const [language, setLanguage] = useState<ILanguage>(getLanguage());
 
   const changeLang = () => {
-    i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
+    changeLanguage(language === 'ru' ? 'en' : 'ru');
+    setLanguage(getLanguage());
   };
 
   return (
     <View style={{ paddingTop: safeAreaInsets.top }}>
-      <Text style={{ marginBottom: 20, fontSize: 20 }}>
-        {t('StartScreen:title')}
-      </Text>
-      <Button title={t('common:button')} onPress={changeLang} />
+      <Text>{language}</Text>
+      <Text style={{ marginBottom: 20, fontSize: 20 }}>{t('title')}</Text>
+      <Button title={t('button')} onPress={changeLang} />
       <View style={{ height: 10 }} />
       <Button
         title={'open first screen'}

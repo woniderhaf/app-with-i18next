@@ -1,3 +1,4 @@
-import { ScreenNamespacesType } from './route-namespaces.ts';
+import ScreenTranslationImpl, { IScreenTranslation } from './screenTranslation';
 
-export type { ScreenNamespacesType };
+export { ScreenTranslationImpl };
+export type {IScreenTranslation}
