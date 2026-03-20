@@ -4,16 +4,16 @@ import { IScreenTranslationTFunction } from './IScreenTranslationTFunction.ts';
 import i18n from '../i18n.ts';
 import { ILanguage } from '../types';
 
-class ScreenTranslationImpl<NS extends IScreenTranslationNamespaceArg>
-  implements IScreenTranslation<NS>
-{
-  constructor(private screenNameSpace: NS) {}
+class ScreenTranslationImpl implements IScreenTranslation {
+  getT = <NS extends IScreenTranslationNamespaceArg>(Namespace: NS) => {
+    const T: IScreenTranslationTFunction<NS> = (key, options = {}) => {
+      return i18n.t(key, {
+        ns: Namespace,
+        ...options,
+      } as any) as string;
+    };
 
-  t: IScreenTranslationTFunction<NS> = (key, options = {}) => {
-    return i18n.t(key, {
-      ns: this.screenNameSpace,
-      ...options,
-    } as any) as string;
+    return T;
   };
 
   getLanguage(): ILanguage {

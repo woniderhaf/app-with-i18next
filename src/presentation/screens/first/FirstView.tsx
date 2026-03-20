@@ -4,7 +4,10 @@ import { Text, View } from 'react-native';
 import { ScreenTranslationImpl } from '../../translations';
 
 const FirstView: IScreen<ROUTES.FIRST> = () => {
-  const { t } = new ScreenTranslationImpl([ROUTES.FIRST]);
+  const { getT } = new ScreenTranslationImpl();
+
+  const t = getT([ROUTES.FIRST]);
+
   return (
     <View>
       <Text>{t('title')}</Text>

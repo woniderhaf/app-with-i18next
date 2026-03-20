@@ -12,10 +12,9 @@ const StartView: IScreen<ROUTES.START> = props => {
   const safeAreaInsets = useSafeAreaInsets();
 
   // будем получать t через DI
-  const { t, changeLanguage, getLanguage } = new ScreenTranslationImpl([
-    ROUTES.START,
-    'common',
-  ]);
+  const { getT, changeLanguage, getLanguage } = new ScreenTranslationImpl();
+
+  const t = getT([ROUTES.START, 'common']);
 
   const [language, setLanguage] = useState<ILanguage>(getLanguage());
 
