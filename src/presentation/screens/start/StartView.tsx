@@ -5,16 +5,28 @@ import { IScreen } from '../../types';
 import { useState } from 'react';
 import { ILanguage } from '../../translations/types';
 import { ScreenTranslationImpl } from '../../translations';
+import { IScreenTranslationTFunction } from '../../translations/screenTranslation/IScreenTranslationTFunction.ts';
+
+interface IStartViewModel {
+  t: IScreenTranslationTFunction<[ROUTES.START, 'common']>;
+  getLanguage(): ILanguage;
+  changeLanguage(language: ILanguage): void;
+}
+
+const StartViewModel = (): IStartViewModel => {
+    const { getT, getLanguage, changeLanguage } = new ScreenTranslationImpl();
+
+    const t = getT([ROUTES.START, 'common'])
+
+    return { t, getLanguage, changeLanguage };
+}
 
 const StartView: IScreen<ROUTES.START> = props => {
   const { navigation } = props;
 
+  const { t, getLanguage, changeLanguage } = StartViewModel()
   const safeAreaInsets = useSafeAreaInsets();
 
-  // будем получать t через DI
-  const { getT, changeLanguage, getLanguage } = new ScreenTranslationImpl();
-
-  const t = getT([ROUTES.START, 'common']);
 
   const [language, setLanguage] = useState<ILanguage>(getLanguage());
 
@@ -27,7 +39,7 @@ const StartView: IScreen<ROUTES.START> = props => {
     <View style={{ paddingTop: safeAreaInsets.top }}>
       <Text>{language}</Text>
       <Text style={{ marginBottom: 20, fontSize: 20 }}>{t('title')}</Text>
-      <Button title={t('button')} onPress={changeLang} />
+      <Button title={t('common:button')} onPress={changeLang} />
       <View style={{ height: 10 }} />
       <Button
         title={'open first screen'}
